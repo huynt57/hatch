@@ -25,6 +25,7 @@ class EventController extends Controller {
             $limit = StringHelper::filterString($request->getQuery('limit'));
             $offset = StringHelper::filterString($request->getQuery('offset'));
             $data = Events::model()->getEvent($limit, $offset);
+            ResponseHelper::JsonReturnSuccess($data, 'Success');
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
         }
@@ -33,7 +34,11 @@ class EventController extends Controller {
     public function actionGetEventByUser() {
         $request = Yii::app()->request;
         try {
-            
+            $user_id = StringHelper::filterString($request->getQuery('user_id'));
+            $limit = StringHelper::filterString($request->getQuery('limit'));
+            $offset = StringHelper::filterString($request->getQuery('offset'));
+            $data = Events::model()->getEvent($user_id, $limit, $offset);
+            ResponseHelper::JsonReturnSuccess($data, 'Success');
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
         }
