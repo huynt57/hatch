@@ -22,7 +22,9 @@ class EventController extends Controller {
     public function actionGetEvent() {
         $request = Yii::app()->request;
         try {
-            
+            $limit = StringHelper::filterString($request->getQuery('limit'));
+            $offset = StringHelper::filterString($request->getQuery('offset'));
+            $data = Events::model()->getEvent($limit, $offset);
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
         }
