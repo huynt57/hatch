@@ -9,7 +9,8 @@ class EventController extends Controller {
     public function actionAddEvent() {
         try {
             $attr = StringHelper::filterArrayString($_POST);
-            if (Events::model()->addEvent($attr)) {
+            $image  = UploadHelper::getUrlUploadSingleImage($_FILES['image'], $_POST['created_by']);
+            if (Events::model()->addEvent($attr, $image)) {
                 ResponseHelper::JsonReturnSuccess('', 'Success');
             } else {
                 ResponseHelper::JsonReturnError('', 'Server Error');

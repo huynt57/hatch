@@ -8,10 +8,14 @@ class Events extends BaseEvents
 		return parent::model($className);
 	}
         
-        public function addEvent($attr)
+        public function addEvent($attr, $image)
         {
             $model = new Events;
             $model->setAttributes($attr);
+            $model->created_at = time();
+            $model->updated_at = time();
+            $model->status = 1;
+            $model->images = $image;
             if($model->save(FALSE))
             {
                 return TRUE;

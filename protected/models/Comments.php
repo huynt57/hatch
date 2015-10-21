@@ -7,4 +7,9 @@ class Comments extends BaseComments
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
+        
+        public function addComment($attr)
+        {
+            
+        }
 }
