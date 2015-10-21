@@ -38,5 +38,19 @@ class User extends BaseUser {
             }
         }
     }
+    
+    public function getUserById($id)
+    {
+        $returnArr = array();
+        $data = User::model()->findByPk($id);
+        if($data)
+        {
+            $returnArr['user_id'] = $data->id;
+            $returnArr['username'] = $data->username;
+            $returnArr['photo'] = $data->photo;
+            return $returnArr;
+        }
+        return FALSE;
+    }
 
 }

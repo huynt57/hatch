@@ -6,6 +6,21 @@ class EventController extends Controller
 	{
 		$this->render('index');
 	}
+        
+        public function actionAddEvent()
+        {
+            
+        }
+        
+        public function actionGetEvent()
+        {
+            
+        }
+        
+        public function actionGetEventByUser()
+        {
+            
+        }
 
 	// Uncomment the following methods and override them if needed
 	/*
