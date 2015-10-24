@@ -52,5 +52,32 @@ class User extends BaseUser {
         }
         return FALSE;
     }
+    
+    public function processLoginWithEmail($email, $password)
+    {
+         $check = User::model()->findByAttributes(array('email' => $email));
+         if ($check) {
+            $check->updated_at = time();
+            if ($check->save(FALSE)) {
+                Yii::app()->session['user_id'] = $check->id;
+                ResponseHelper::JsonReturnSuccess($check, "Success");
+            } else {
+                ResponseHelper::JsonReturnError("", "Server Error");
+            }
+        } else {
+            $model = new User;
+            $model->username = $email;
+            $model->password = md5($password);
+            $model->created_at = time();
+            $model->updated_at = time();
+            $model->status = 1;
+            if ($model->save(FALSE)) {
+                Yii::app()->session['user_id'] = $model->id;
+                ResponseHelper::JsonReturnSuccess($model, "Success");
+            } else {
+                ResponseHelper::JsonReturnError("", "Server Error");
+            }
+        }
+    }
 
 }

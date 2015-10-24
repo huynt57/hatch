@@ -24,6 +24,22 @@ class UserController extends Controller {
             Yii::app()->end();
         }
     }
+    
+    public function actionLoginWithEmail()
+    {
+        $request = Yii::app()->request;
+        if ($request->isPostRequest && isset($_POST)) {
+            try {
+                $facebook_id = StringHelper::filterString($request->getPost('email'));
+                $age = StringHelper::filterString($request->getPost('password'));
+               
+                User::model()->processLoginWithEmail($email, $password);
+            } catch (exception $e) {
+                var_dump($e->getMessage());
+            }
+            Yii::app()->end();
+        }
+    }
 
     // Uncomment the following methods and override them if needed
     /*
