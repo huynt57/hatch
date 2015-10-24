@@ -18,6 +18,20 @@ class FeedbackController extends Controller {
             var_dump($ex->getMessage());
         }
     }
+    
+    public function actionAddQuestionForFeedback()
+    {
+        try {
+            $attr = StringHelper::filterArrayString($_POST);
+            if (Feedback::model()->addQuestionFeedback($attr)) {
+                ResponseHelper::JsonReturnSuccess('', 'Success');
+            } else {
+                ResponseHelper::JsonReturnError('', 'Server Error');
+            }
+        } catch (Exception $ex) {
+            var_dump($ex->getMessage());
+        }
+    }
 
     public function actionGetFeedbackByEvent() {
         $request = Yii::app()->request;
@@ -28,6 +42,19 @@ class FeedbackController extends Controller {
 
             $data = Feedback::model()->getFeedbackByEvent($event_id, $limit, $offset);
             ResponseHelper::JsonReturnSuccess($data, 'Success');
+        } catch (Exception $ex) {
+            var_dump($ex->getMessage());
+        }
+    }
+
+    public function actionAddUserFeedback() {
+        try {
+            $attr = StringHelper::filterArrayString($_POST);
+            if (Feedback::model()->addUserFeedback($attr)) {
+                ResponseHelper::JsonReturnSuccess('', 'Success');
+            } else {
+                ResponseHelper::JsonReturnError('', 'Server Error');
+            }
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
         }

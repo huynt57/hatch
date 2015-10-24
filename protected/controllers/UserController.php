@@ -40,6 +40,22 @@ class UserController extends Controller {
             Yii::app()->end();
         }
     }
+    
+    public function actionAddPoint()
+    {
+        $request = Yii::app()->request;
+        if ($request->isPostRequest && isset($_POST)) {
+            try {
+                $event_id = StringHelper::filterString($request->getPost('event_id'));
+                $user_id = StringHelper::filterString($request->getPost('user_id'));
+               
+                User::model()->addPoint($event_id, $user_id);
+            } catch (exception $e) {
+                var_dump($e->getMessage());
+            }
+            Yii::app()->end();
+        }
+    }
 
     // Uncomment the following methods and override them if needed
     /*
