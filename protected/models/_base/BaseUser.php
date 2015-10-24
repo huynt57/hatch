@@ -24,6 +24,7 @@
  * @property integer $is_online
  * @property string $device_id
  * @property integer $status
+ * @property integer $point
  *
  */
 abstract class BaseUser extends GxActiveRecord {
@@ -46,12 +47,12 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('gender, age, created_at, updated_at, is_online, status', 'numerical', 'integerOnly'=>true),
+			array('gender, age, created_at, updated_at, is_online, status, point', 'numerical', 'integerOnly'=>true),
 			array('facebook_id', 'length', 'max'=>225),
 			array('username, password, photo, access_token, device_id', 'length', 'max'=>255),
 			array('facebook_access_token, description', 'safe'),
-			array('facebook_id, facebook_access_token, username, password, photo, gender, age, description, created_at, updated_at, access_token, is_online, device_id, status', 'default', 'setOnEmpty' => true, 'value' => null),
-			array('id, facebook_id, facebook_access_token, username, password, photo, gender, age, description, created_at, updated_at, access_token, is_online, device_id, status', 'safe', 'on'=>'search'),
+			array('facebook_id, facebook_access_token, username, password, photo, gender, age, description, created_at, updated_at, access_token, is_online, device_id, status, point', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('id, facebook_id, facebook_access_token, username, password, photo, gender, age, description, created_at, updated_at, access_token, is_online, device_id, status, point', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +83,7 @@ abstract class BaseUser extends GxActiveRecord {
 			'is_online' => Yii::t('app', 'Is Online'),
 			'device_id' => Yii::t('app', 'Device'),
 			'status' => Yii::t('app', 'Status'),
+			'point' => Yii::t('app', 'Point'),
 		);
 	}
 
@@ -103,6 +105,7 @@ abstract class BaseUser extends GxActiveRecord {
 		$criteria->compare('is_online', $this->is_online);
 		$criteria->compare('device_id', $this->device_id, true);
 		$criteria->compare('status', $this->status);
+		$criteria->compare('point', $this->point);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

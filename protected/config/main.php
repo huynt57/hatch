@@ -9,7 +9,7 @@ return array(
     'name' => 'Soon',
     // preloading 'log' component
     'preload' => array('log'),
-    'defaultController' => 'home/newsFeed',
+  //  'defaultController' => 'home/newsFeed',
     // autoloading model and component classes
     'import' => array(
         'application.models.*',

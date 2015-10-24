@@ -42,9 +42,10 @@ abstract class BaseEvents extends GxActiveRecord {
 
 	public function rules() {
 		return array(
+			array('date', 'required'),
 			array('created_at, created_by, updated_at, status, date, type', 'numerical', 'integerOnly'=>true),
 			array('name, images, description, address', 'safe'),
-			array('name, images, description, created_at, created_by, updated_at, status, date, address, type', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('name, images, description, created_at, created_by, updated_at, status, address, type', 'default', 'setOnEmpty' => true, 'value' => null),
 			array('event_id, name, images, description, created_at, created_by, updated_at, status, date, address, type', 'safe', 'on'=>'search'),
 		);
 	}
