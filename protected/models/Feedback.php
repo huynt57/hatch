@@ -13,10 +13,12 @@ class Feedback extends BaseFeedback
             if(is_array($attr))
             {
                 $model = new Feedback;
+                $model->created_at = time();
+                $model->updated_at = time();
                 $model->setAttributes($attr);
                 if($model->save(FALSE))
                 {
-                    return TRUE;
+                    return $model;
                 }
             }
             return FALSE;
@@ -30,5 +32,35 @@ class Feedback extends BaseFeedback
            $criteria->condition = "event_id = $event_id";
            $data = Feedback::model()->findAll($criteria);
            return $data;
+        }
+        
+        public function addUserFeedback($attr)
+        {
+            if(is_array($attr))
+            {
+                $model = new FeedbackUser;
+                $model->setAttributes($attr);
+                if($model->save(FALSE))
+                {
+                    return TRUE;
+                }
+            }
+            return FALSE;
+        }
+        
+        public function addQuestionFeedback($attr)
+        {
+            if(is_array($attr))
+            {
+                $model = new FeedbackQuestion();
+                $model->created_at = time();
+                $model->updated_at = time();
+                $model->setAttributes($attr);
+                if($model->save(FALSE))
+                {
+                    return TRUE;
+                }
+            }
+            return FALSE;
         }
 }
