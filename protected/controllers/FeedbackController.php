@@ -9,8 +9,9 @@ class FeedbackController extends Controller {
     public function actionAdd() {
         try {
             $attr = StringHelper::filterArrayString($_POST);
-            if (Feedback::model()->addFeedback($attr)) {
-                ResponseHelper::JsonReturnSuccess('', 'Success');
+            $model = Feedback::model()->addFeedback($attr);
+            if ($model) {
+                ResponseHelper::JsonReturnSuccess($model, 'Success');
             } else {
                 ResponseHelper::JsonReturnError('', 'Server Error');
             }
@@ -37,10 +38,8 @@ class FeedbackController extends Controller {
         $request = Yii::app()->request;
         try {
             $event_id = StringHelper::filterString($request->getQuery('event_id'));
-            $limit = StringHelper::filterString($request->getQuery('limit'));
-            $offset = StringHelper::filterString($request->getQuery('offset'));
 
-            $data = Feedback::model()->getFeedbackByEvent($event_id, $limit, $offset);
+            $data = Feedback::model()->getFeedbackByEvent($event_id);
             ResponseHelper::JsonReturnSuccess($data, 'Success');
         } catch (Exception $ex) {
             var_dump($ex->getMessage());

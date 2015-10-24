@@ -38,7 +38,7 @@ class EventController extends Controller {
             $user_id = StringHelper::filterString($request->getQuery('user_id'));
             $limit = StringHelper::filterString($request->getQuery('limit'));
             $offset = StringHelper::filterString($request->getQuery('offset'));
-            $data = Events::model()->getEvent($user_id, $limit, $offset);
+            $data = Events::model()->getEventByUser($user_id, $limit, $offset);
             ResponseHelper::JsonReturnSuccess($data, 'Success');
         } catch (Exception $ex) {
             var_dump($ex->getMessage());

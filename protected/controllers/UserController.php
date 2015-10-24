@@ -30,8 +30,8 @@ class UserController extends Controller {
         $request = Yii::app()->request;
         if ($request->isPostRequest && isset($_POST)) {
             try {
-                $facebook_id = StringHelper::filterString($request->getPost('email'));
-                $age = StringHelper::filterString($request->getPost('password'));
+                $email = StringHelper::filterString($request->getPost('email'));
+                $password = StringHelper::filterString($request->getPost('password'));
                
                 User::model()->processLoginWithEmail($email, $password);
             } catch (exception $e) {
@@ -47,9 +47,9 @@ class UserController extends Controller {
         if ($request->isPostRequest && isset($_POST)) {
             try {
                 $event_id = StringHelper::filterString($request->getPost('event_id'));
-                $user_id = StringHelper::filterString($request->getPost('user_id'));
-               
+                $user_id = StringHelper::filterString($request->getPost('user_id'));             
                 User::model()->addPoint($event_id, $user_id);
+                ResponseHelper::JsonReturnSuccess('', 'Success');
             } catch (exception $e) {
                 var_dump($e->getMessage());
             }

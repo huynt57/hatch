@@ -47,7 +47,7 @@ class Events extends BaseEvents
          public function getEventByUser($user_id, $limit, $offset)
         {
             $criteria = new CDbCriteria;
-            $criteria->created_by = $user_id;
+            $criteria->condition = "created_by = $user_id";
             $criteria->limit = $limit;
             $criteria->offset = $offset;
             $result = Events::model()->findAll($criteria);

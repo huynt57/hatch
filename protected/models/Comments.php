@@ -13,6 +13,7 @@ class Comments extends BaseComments {
         $model->setAttributes($attr);
         $model->created_at = time();
         $model->updated_at = time();
+        $model->status = 1;
         if ($model->save(FALSE)) {
             return TRUE;
         }
@@ -26,6 +27,7 @@ class Comments extends BaseComments {
         $criteria->offset = $offset;
         $criteria->condition = "event_id = $event_id";
         $data = Comments::model()->findAll($criteria);
+        return $data;
     }
 
 }

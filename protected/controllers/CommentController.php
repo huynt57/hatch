@@ -22,10 +22,10 @@ class CommentController extends Controller {
     public function actionGetCommentByEvent() {
         $request = Yii::app()->request;
         try {
-            $user_id = StringHelper::filterString($request->getQuery('user_id'));
+            $event_id = StringHelper::filterString($request->getQuery('event_id'));
             $limit = StringHelper::filterString($request->getQuery('limit'));
             $offset = StringHelper::filterString($request->getQuery('offset'));
-            $data = Comments::model()->getCommentsByEvent($user_id, $limit, $offset);
+            $data = Comments::model()->getCommentsByEvent($event_id, $limit, $offset);
             ResponseHelper::JsonReturnSuccess($data, 'Success');
         } catch (Exception $ex) {
             var_dump($ex->getMessage());
